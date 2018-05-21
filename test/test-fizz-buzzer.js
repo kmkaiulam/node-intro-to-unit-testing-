@@ -3,40 +3,42 @@ const expect = require('chai').expect;
 
 //import fizzbuzzer
 
-const fizzbuzzer = require('../fizzBuzzer');
+const fizzBuzzer = require('../fizzBuzzer');
 
 // unit tests for our `fizzBuzzer` function
 describe('fizzBuzzer', function() {
-
-    // test the normal case
-    it('should add two numbers', function() {
-      // range of normal inputs, including
-      // notable cases like negative answers
-      const normalCases = [
-        {a: 2, b: 3, expected: 5},
-        {a: 200, b: 2000, expected: 2200},
-        {a: 2, b: -5, expected: -3}
-      ];
-      // for each set of inputs (a, b), `adder` should
-      // produce the expected value
-      normalCases.forEach(function(input) {
-        const answer = adder(input.a, input.b);
-        expect(answer).to.equal(input.expected);
+    it('should return \'fizz-buzz\' for num divisible by 15', function() {
+      const fizzBuzzCase = [15,30,45];
+        fizzBuzzCase.forEach(function(input) { 
+        expect(fizzBuzzer(input)).to.equal('fizz-buzz');
       });
     });
   
-    it('should raise error if args not numbers', function() {
-      // range of bad inputs where not both are numbers
-      const badInputs = [
-        ['a', 1],
-        ['1', 2],
-        [2, false]
-      ];
-      // prove that an error is raised for bad inputs
-      badInputs.forEach(function(input) {
-        expect(function() {
-          adder(input[0], input[1]);
-        }).to.throw(Error);
+    it('should return \'buzz\' for num divisible by 5', function() {
+      
+      const buzzCases = [5, 10, 20];
+      buzzCases.forEach(function(num) {
+        expect(fizzBuzzer(num)).to.equal('buzz');
       });
     });
-  });
+        
+    it('should return \'fizz\' for num divisible by 3', function () {
+        const fizzCases = [3, 6, 9, 12];
+        fizzCases.forEach(function(num) {
+            const answer = fizzBuzzer(num);
+            expect(answer).to.equal('fizz');
+    });
+  })
+    it('should return a number for values not divisible by 3 or 5', function (){ 
+        const numCases = [1, 2, 4, 7];
+        numCases.forEach(function(num) {
+            expect(fizzBuzzer(num)).to.equal(num)
+        });
+    });
+    it('should throw an error if input is not a number', function (){ 
+        const badInputs = [true, false, 'hi', {}, [1, 2, 3]];
+        badInputs.forEach(function(num){
+            expect(fizzBuzzer(num));
+        }).to.throw(Error);
+     });
+    });
